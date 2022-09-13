@@ -4,20 +4,19 @@
 #include <stdlib.h>
 #include <time.h>
 #include "DataStruct.h"
+#include "TestFunction.h"
 
 int main () {
-    srand((unsigned)time(NULL));
-    printf("Hello, World!\n");
-    DynamicSqList L;
-    InitList_Dynamic(&L);
-    for (int i = 0; i < 105; i++) {
-        if(ListInsert_Dynamic(&L, i, rand()%10) == OVERFLOW){
-            printf("OVERFLOW\n");
-            exit(0);
-        }
-    }
-    printf("%d\n", ListLength_Dynamic(&L));
-    ListPrint_Dynamic(&L);
-    DestroyList_Dynamic(&L);
-    return 0;
+//    srand((unsigned int)time(NULL));
+//    for (int i = 0; i < 10; i++) {
+//        printf("%d ", rand()%100);
+//    }
+
+    int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    LiStack stack = InitLiStack();
+    printf("%d", stack->data);
+
+
+
 }

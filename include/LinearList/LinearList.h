@@ -6,5 +6,7 @@
 #define INC_408_DATASTRUCT_LINEARLIST_H
 
 #include "LinearList/SequenceTable.h"
+#include "LinearList/SqStack.h"
+#include "LinearList/LiStack.h"
 
 #endif //INC_408_DATASTRUCT_LINEARLIST_H
