@@ -65,58 +65,55 @@ int LiStackCount(LiStack stack){
     return stack->data;
 }
 
+
+//----------------双链表实现链栈--------------//
+
 DLiStack InitDLiStack(){
-    DLiStack stack = (DLiStack)malloc(sizeof(DLiStack));
-
-    if(!stack) exit(OVERFLOW);
-
-    stack->next = NULL;
-    stack->prev = NULL;
+    DLiStack stack = NULL;
     return stack;
 }
 
 Status DLiStackEmpty(DLiStack stack){
-    if(stack->next == NULL) return TRUE;
+    if(stack == NULL) return TRUE;
     return FALSE;
 }
 
-Status Push_DLiStack(DLiStack stack, ElemType x){
+DLiStack Push_DLiStack(DLiStack stack, ElemType x){
     DLiStackNode* node = (DLiStackNode*)malloc(sizeof(DLiStackNode));
 
-    if(!node) return OVERFLOW;
+    if(!node) exit(OVERFLOW);
 
-    node->next = stack->next;
+    node->next = NULL;
     node->data = x;
     node->prev = stack;
 
-    stack->next = node;
+    if(stack) {
+        stack->next = node;
+    }
+    stack = node;
 
-    return OK;
+    return stack;
 }
 
-Status Pop_DLiStack(DLiStack stack, ElemType *x){
-    if(DLiStackEmpty(stack)) return OVERFLOW;
+DLiStack Pop_DLiStack(DLiStack stack, ElemType *x){
+    if(DLiStackEmpty(stack)) exit(OVERFLOW);
 
-    DLiStackNode* node = stack->next;
+    DLiStackNode* node = stack;
 
     *x = node->data;
-    node->prev = NULL;
-    stack->next = node->next;
-    node->next = NULL;
+    stack = stack->prev;
+
+    if(stack) stack->next = NULL;
 
     free(node);
 
-    if(!DLiStackEmpty(stack)){
-        stack->next->prev = stack;
-    }
-
-    return OK;
+    return stack;
 }
 
 Status GetTop_DLiStack(DLiStack stack, ElemType *x){
     if(DLiStackEmpty(stack)) return OVERFLOW;
 
-    *x = stack->next->data;
+    *x = stack->data;
 
     return OK;
 }
@@ -124,7 +121,7 @@ Status GetTop_DLiStack(DLiStack stack, ElemType *x){
 Status Destroy_DLiStack(DLiStack stack){
     while(!DLiStackEmpty(stack)){
         int x = 0;
-        Pop_DLiStack(stack, &x);
+        stack = Pop_DLiStack(stack, &x);
     }
     free(stack);
     return OK;

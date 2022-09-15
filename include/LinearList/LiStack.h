@@ -24,7 +24,7 @@ Status LiStackCount(LiStack stack); //
 
 
 //----------------双链表实现链栈----------//
-//采用含头结点方式实现
+//采用不含头结点方式实现-----栈顶在链尾
 typedef struct DLiStackNode{
     ElemType data;
     struct DLiStackNode *prev, *next;
@@ -34,8 +34,8 @@ typedef struct DLiStackNode{
 //-----------基本操作函数----------//
 DLiStack InitDLiStack();
 Status DLiStackEmpty(DLiStack stack);
-Status Push_DLiStack(DLiStack stack, ElemType x);
-Status Pop_DLiStack(DLiStack stack, ElemType *x);
+DLiStack Push_DLiStack(DLiStack stack, ElemType x);
+DLiStack Pop_DLiStack(DLiStack stack, ElemType *x);
 Status GetTop_DLiStack(DLiStack stack, ElemType *x);
 Status Destroy_DLiStack(DLiStack stack);
 
