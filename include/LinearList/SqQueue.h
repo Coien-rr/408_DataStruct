@@ -13,6 +13,8 @@
 typedef struct {
     ElemType data[MaxSize];
     int front, rear;
+    int tag;                                  //用于循环队列判空
+    int count;                               //用于循环队列判满
 } SqQueue;
 
 Status InitSqQueue(SqQueue* queue);
@@ -21,5 +23,6 @@ Status SqQueueFull(SqQueue* queue);
 Status EnSqQueue(SqQueue* queue, ElemType x);
 Status DeSqQueue(SqQueue* queue, ElemType* x);
 Status GetHeadSqQueue(SqQueue* queue, ElemType* x);
+int SqQueueCount(SqQueue* queue);
 
 #endif //INC_408_DATASTRUCT_SQQUEUE_H

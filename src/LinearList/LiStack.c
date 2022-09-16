@@ -23,7 +23,7 @@ Status LiStackEmpty(LiStack stack){
 
 Status Push_LiStack(LiStack stack, ElemType x){
     LiStackNode* node = (LiStackNode* )malloc(sizeof(LiStackNode));
-    if(!node) return OVERFLOW;  //请求分配内存空间失败
+    if(!node) return ERROR;  //请求分配内存空间失败
     node->data = x;
     node->next = stack->next;
     stack->next = node;

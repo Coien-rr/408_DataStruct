@@ -7,9 +7,23 @@
 #include "TestFunction.h"
 
 int main () {
-    CreateTestData(10);
-    int a = GetTestData();
-    for (int i = 0; i < 5; i++) {
-        printf("%d", a);
+    LiQueue queue = InitLiQueue();
+
+    printf("LiQueueEmpty: %d\n", LiQueueEmpty(queue));
+
+    for (int i = 0; i < 10; i++) {
+        EnLiQueue(queue, i);
     }
+
+    int top = 0;
+    GetTopLiQueue(queue, &top);
+    printf("LiQueueTop: %d\n", top);
+
+    for (int i = 0; i < 5; i++) {
+        int x = 0;
+        DeLiQueue(queue, &x);
+        printf("DeLiQueueResult: %d\n", x);
+    }
+
+    DestroyLiQueue(queue);
 }

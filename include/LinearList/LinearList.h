@@ -9,5 +9,6 @@
 #include "LinearList/SqStack.h"
 #include "LinearList/LiStack.h"
 #include "LinearList/SqQueue.h"
+#include "LinearList/LiQueue.h"
 
 #endif //INC_408_DATASTRUCT_LINEARLIST_H
