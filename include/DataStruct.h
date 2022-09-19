@@ -7,5 +7,6 @@
 
 #include "BasicType.h"
 #include "LinearList/LinearList.h"
+#include "TreeStructure/TreeStructure.h"
 
 #endif //INC_408_DATASTRUCT_DATASTRUCT_H
