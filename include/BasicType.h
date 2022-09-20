@@ -18,4 +18,5 @@
 typedef int Status;
 typedef int ElemType;
 
+
 #endif //INC_408_DATASTRUCT_BASICTYPE_H

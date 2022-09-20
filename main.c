@@ -6,10 +6,13 @@
 #include "DataStruct.h"
 #include "TestFunction.h"
 
+
 int main () {
-    SqBiTree tree;
+    LiBinaryTree tree = NULL;
 
-    if(!initSqBiTree(&tree)) return ERROR;
+    initLiBinaryTree(&tree);
+    creatDemoLiBiTree(tree);
 
-    preOrderSqBiTree(&tree, 1);
+    printf("%d ", tree->root);
+
 }
