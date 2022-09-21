@@ -38,6 +38,9 @@ Status inOrderSqBiTree(SqBiTree* tree, int index);
 Status postOrderSqBiTree(SqBiTree* tree, int index);
 
 //辅助函数
+Status findFatherSqBiTree(int index);
+Status findLchildSqBiTree(int index);
+Status findRchildSqBiTree(int index);
 Status paramCheckSqBiTree(int index);
 Status copyNodeSqBiTree(SqBiTree* tree, int index, SqBiTreeNode* node);
 Status visitSqBiTreeNode(SqBiTree* tree, int index);

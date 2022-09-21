@@ -8,11 +8,9 @@
 
 
 int main () {
-    LiBinaryTree tree = NULL;
+    SqTree tree;
+    createDemoSqTree(&tree);
 
-    initLiBinaryTree(&tree);
-    creatDemoLiBiTree(tree);
-
-    printf("%d ", tree->root);
+    printf("%d ", getSqTreeParent(&tree, 5));
 
 }

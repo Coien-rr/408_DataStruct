@@ -73,6 +73,20 @@ Status postOrderSqBiTree(SqBiTree* tree, int index) {
     return OK;
 }
 
+
+//辅助函数的实现
+int findFatherSqBiTree(int index){
+    return (int)index/2;
+}
+
+int findLchildSqBiTree(int index){
+    return index*2;
+}
+
+int findRchildSqBiTree(int index){
+    return index*2 + 1;
+}
+
 Status paramCheckSqBiTree(int index) {
     if ( index <=0 || index > MaxSize ) {
         return OVERFLOW;

@@ -7,5 +7,7 @@
 
 #include "SqBinaryTree.h"
 #include "LiBinaryTree.h"
+#include "SqTree.h"
+#include "LiTree.h"
 
 #endif //INC_408_DATASTRUCT_TREESTRUCTURE_H
