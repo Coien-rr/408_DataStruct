@@ -9,7 +9,7 @@
 
 //--------双亲表示法定义顺序树（森林）-------------//
 typedef struct SqTreeNode {
-    char data;
+    ElemType data;
     int parentIndex;
 } SqTreeNode;
 

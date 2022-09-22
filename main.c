@@ -8,9 +8,7 @@
 
 
 int main () {
-    SqTree tree;
-    createDemoSqTree(&tree);
 
-    printf("%d ", getSqTreeParent(&tree, 5));
+
 
 }
