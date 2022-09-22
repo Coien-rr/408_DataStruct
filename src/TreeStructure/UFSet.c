@@ -114,5 +114,4 @@ void testUFSetFunc(){
     findUFSet(&ufSet, 6);
 
     printUFSet(&ufSet);
-    Graph
 }
