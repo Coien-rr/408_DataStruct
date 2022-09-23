@@ -8,5 +8,6 @@
 #include "BasicType.h"
 #include "LinearList/LinearList.h"
 #include "TreeStructure/TreeStructure.h"
+#include "GraphStructure/GraphStructure.h"
 
 #endif //INC_408_DATASTRUCT_DATASTRUCT_H
