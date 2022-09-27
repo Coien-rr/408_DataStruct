@@ -10,5 +10,6 @@
 #include "LinearList/LiStack.h"
 #include "LinearList/SqQueue.h"
 #include "LinearList/LiQueue.h"
+#include "LinearList/LinkList.h"
 
 #endif //INC_408_DATASTRUCT_LINEARLIST_H
