@@ -2,6 +2,8 @@
 // Created by Lenovo on 2022/9/27.
 //
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "LinearList/HashArray.h"
 
 Status initHashArray(HashArray* hash, HashLength length, HashFunc p){
@@ -74,3 +76,99 @@ Status removeElemHashArray(HashArray* hash, int elem){
 
     return FALSE;
 }
+
+//----------哈希数组（拉链法）--------------//
+Status initHashArrayPro(HashArrayPro* hash, HashFunc p){
+    hash->p = p;
+
+    for (int i = 0; i < MaxSize; ++i) {
+        hash->hashArr[i].data = 0;
+        hash->hashArr[i].next = NULL;
+    }
+
+    return OK;
+}
+
+Status addElemHashArrayPro(HashArrayPro* hash, ElemType elem){
+    IndexType index = elem % hash->p;
+
+    HashNode* node = &(hash->hashArr[index]);
+
+    while (node->next != NULL){
+        node = node->next;
+    }
+
+    node->next = createHashNode(elem);
+
+    hash->hashArr[index].data++;
+
+    return OK;
+}
+
+Status findElemHashArrayPro(HashArrayPro* hash, ElemType elem){
+    IndexType index = elem % hash->p;
+
+    if ( hash->hashArr[index].data == 0 ) return FALSE;
+
+    HashNode* node = hash->hashArr[index].next;
+
+    while( node != NULL ) {
+        if ( node->data == elem ) return TRUE;
+        node = node->next;
+    }
+
+    return FALSE;
+}
+
+Status removeElemHashArrayPro(HashArrayPro* hash, ElemType elem){
+    IndexType index = elem % hash->p;
+
+    if ( hash->hashArr[index].data == 0 ) return ERROR;
+
+    HashNode* node = &(hash->hashArr[index]);
+
+    while( node->next != NULL ){
+        if ( node->next->data == elem ){
+            HashNode* nextNode = node->next;
+
+            node->next = nextNode->next;
+
+            nextNode->next = NULL;
+
+            free(nextNode);
+
+            return OK;
+        }
+        node = node->next;
+    }
+
+    return ERROR;
+
+}
+
+
+//---------辅助函数----------//
+
+HashNode* createHashNode(ElemType elem){
+    HashNode* node = (HashNode*)malloc(sizeof(HashNode));
+
+    if ( !node ) exit(ERROR);
+
+    node->data = elem;
+    node->next = NULL;
+
+    return node;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

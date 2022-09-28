@@ -25,4 +25,23 @@ Status removeElemHashArray(HashArray* hash, ElemType elem);
 
 
 
+//----------哈希数组（拉链法）-----------//
+typedef struct HashNode {
+    ElemType data;
+    struct HashNode *next;
+} HashNode;
+
+typedef struct HashArrayPro {
+    HashNode hashArr[MaxSize]; //数组的data值为该链上有几个数据
+    HashFunc p;
+} HashArrayPro;
+
+Status initHashArrayPro(HashArrayPro* hash, HashFunc p);
+Status addElemHashArrayPro(HashArrayPro* hash, ElemType elem);
+Status findElemHashArrayPro(HashArrayPro* hash, ElemType elem);
+Status removeElemHashArrayPro(HashArrayPro* hash, ElemType elem);
+
+//辅助函数
+HashNode* createHashNode(ElemType elem);
+
 #endif //INC_408_DATASTRUCT_HASHARRAY_H
