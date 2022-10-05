@@ -28,6 +28,9 @@ Status ListInsert_Static(StaticSqList *L, int i, ElemType e);           //在L�
 Status ListDelete_Static(StaticSqList *L, int i, ElemType *e);          //在L的第i个位置删除元素
 Status ListPrint_Static(StaticSqList *L);       //打印顺序表
 
+//辅助函数
+Status checkParameterSqList();
+Status createDemoSqList(StaticSqList *L, int count);
 
 //-------------线性表的动态分配顺序存储结构------------//
 typedef struct {
@@ -49,4 +52,15 @@ Status ListInsert_Dynamic(DynamicSqList *L, int i, ElemType e);           //在L
 Status ListDelete_Dynamic(DynamicSqList *L, int i, ElemType *e);          //在L的第i个位置删除元素
 Status ListPrint_Dynamic(DynamicSqList *L);     //打印顺序表
 Status IncreaseSize(DynamicSqList *L);          //动态增加顺序表长度
+
+
+
+
+//------------数组有关排序算法的实现----------//
+//快速排序
+Status quickSort(ElemType arr[], IndexType low, IndexType high);
+IndexType partition(ElemType arr[], IndexType low, IndexType high);
+
+
+
 #endif //INC_408_DATASTRUCT_SEQUENCETABLE_H

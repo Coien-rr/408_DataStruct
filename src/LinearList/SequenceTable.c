@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "LinearList/SequenceTable.h"
 
 
@@ -103,6 +104,23 @@ Status ListPrint_Static(StaticSqList *L){
         printf("%d ", L->data[i]);
     }
     printf("end\n");
+    return OK;
+}
+
+//辅助函数
+//参数检查
+Status checkParameterSqList(IndexType index){
+
+}
+
+//创建一个Demo顺序表
+Status createDemoSqList(StaticSqList *L, int count){
+    L->Length = count;
+    srand((unsigned int)time(NULL));
+    for (int i = 0; i < count; i++) {
+        L->data[i] = rand()%100;
+    }
+    //ListPrint_Static(L);
     return OK;
 }
 
@@ -232,7 +250,31 @@ Status IncreaseSize(DynamicSqList *L){
     return OK;
 }
 
+//------------数组有关排序算法的实现----------//
+//快速排序
+Status quickSort(ElemType arr[], IndexType low, IndexType high){
+    //参数检查
+    if ( low < high ){
+        IndexType piovtIndex = partition(arr, low, high);
+        quickSort(arr, low, piovtIndex - 1);
+        quickSort(arr, piovtIndex + 1, high);
+    }
+    return OK;
+}
 
+IndexType partition(ElemType arr[], IndexType low, IndexType high){
+
+    ElemType piovt = arr[low];
+    while ( low < high ) {
+        while ( low < high && arr[high] >= piovt ) high--;
+        arr[low] = arr[high];
+        while ( low < high && arr[low] <=piovt ) low++;
+        arr[high] = arr[low];
+    }
+    arr[low] = piovt;
+
+    return low;
+}
 
 
 
