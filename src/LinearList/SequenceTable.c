@@ -250,6 +250,27 @@ Status IncreaseSize(DynamicSqList *L){
     return OK;
 }
 
+//------------数组有关查找算法的实现(以静态顺序表为例)-----------//
+//默认升序
+//折半查找
+int binarySearch(StaticSqList L, ElemType key){
+    int low = 0;
+    int high = L.Length - 1;
+    while ( low < high ){
+        int mid = (low + high)/2;
+        if ( L.data[mid] == key ){
+            return mid;
+        } else if ( L.data[mid] < key ){
+            low = mid + 1;
+        } else if ( L.data[mid] > key ){
+            high = mid - 1;
+        }
+    }
+    return FALSE;
+}
+
+
+
 //------------数组有关排序算法的实现----------//
 //快速排序
 Status quickSort(ElemType arr[], IndexType low, IndexType high){
@@ -275,6 +296,54 @@ IndexType partition(ElemType arr[], IndexType low, IndexType high){
 
     return low;
 }
+
+//归并排序
+Status Merge(StaticSqList* L, IndexType low, IndexType mid, IndexType high){
+    //ElemType* arr = (ElemType*)malloc(sizeof(ElemType)*(low-high+1));
+    ElemType arr[MaxSize] = {0};
+    //copy数组
+    for (int i = low; i <= high; i++){
+        arr[i] = L->data[i];
+    }
+
+    int indexI = low;
+    int indexJ = mid+1;
+    int index = low;
+    while (indexI <= mid && indexJ <= high){
+        if ( arr[indexI] <= arr[indexJ] ){
+            L->data[index++] = arr[indexI++];
+        } else if ( arr[indexI] > arr[indexJ] ){
+            L->data[index++] = arr[indexJ++];
+        }
+    }
+
+    while ( indexI <= mid )  L->data[index++] = arr[indexI++];
+    while ( indexJ <= high ) L->data[index++] = arr[indexJ++];
+
+//    free(arr);
+    return OK;
+}
+
+Status mergeSort(StaticSqList* L, IndexType low, IndexType high){
+    int mid = (low + high)/2;
+    if ( low < high ){
+        mergeSort(L, low, mid);
+        mergeSort(L, mid+1, high);
+        Merge(L, low, mid, high);
+    }
+
+    return OK;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

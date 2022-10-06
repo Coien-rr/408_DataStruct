@@ -55,12 +55,19 @@ Status IncreaseSize(DynamicSqList *L);          //动态增加顺序表长度
 
 
 
+//------------数组有关查找算法的实现(以静态顺序表为例)-----------//
+//折半查找
+Status binarySearch(StaticSqList L, ElemType key);
+
 
 //------------数组有关排序算法的实现----------//
 //快速排序
 Status quickSort(ElemType arr[], IndexType low, IndexType high);
 IndexType partition(ElemType arr[], IndexType low, IndexType high);
 
+//归并排序
+Status Merge(StaticSqList* L, IndexType low, IndexType mid, IndexType high);
+Status mergeSort(StaticSqList* L, IndexType low, IndexType high);
 
 
 #endif //INC_408_DATASTRUCT_SEQUENCETABLE_H

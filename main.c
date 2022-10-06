@@ -14,7 +14,11 @@ int main () {
 
     ListPrint_Static(&sqList);
 
-    quickSort(sqList.data, 0, sqList.Length-1);
+    int key = sqList.data[11];
+
+    mergeSort(&sqList, 0, 11);
 
     ListPrint_Static(&sqList);
+
+    printf("binarySearch Test!\nIndex: %d!", binarySearch(sqList, key));
 }
