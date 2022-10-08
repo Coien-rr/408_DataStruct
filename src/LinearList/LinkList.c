@@ -101,87 +101,23 @@ LinkNode* linkListNextELem(LinkList list, LinkNode* curNode){
 }
 
 Status linkListHeadInsert(LinkList list, int elem){
-    if ( !list ) return ERROR;
-
-    LinkNode* newNode = creatNewLinkNode(elem);
-
-    newNode->next = list->next;
-    list->next = newNode;
-    list->data++;
-
-    return OK;
 
 }
 
 Status linkListTailInsert(LinkList list, int elem){
-    if ( !list ) return ERROR;
 
-    LinkNode* newNode = creatNewLinkNode(elem);
-    LinkNode* curNode = list;
-
-    while(curNode->next != NULL){
-        curNode = curNode->next;
-    }
-
-    curNode->next = newNode;
-
-    list->data++;
-
-    return OK;
 }
 
 Status linkListInsert(LinkList list, int index, int elem){
-    if ( !list ) return ERROR;
 
-    if ( index < 1 || index >= list->data ) return OVERFLOW;
-
-    LinkNode* node = list;
-
-    for (int i = index; i > 1; i--) {
-        node = node->next;
-    }
-
-    LinkNode* newNode = creatNewLinkNode(elem);
-
-    newNode->next = node->next;
-    node->next = newNode;
-
-    list->data++;
-
-    return OK;
 }
 
 Status linkListRemove(LinkList list, int index, int *elem){
-    if ( !list ) return ERROR;
 
-    if ( index < 1 || index > list->data ) return OVERFLOW;
-
-    LinkNode* node = list;
-
-    for (int i = index; i > 1; i--) {
-        node = node->next;
-    }
-
-    LinkNode* oldNode = node->next;
-
-    *elem = oldNode->data;
-
-    node->next = oldNode->next;
-
-    free(oldNode);
-
-    return OK;
 }
 
 Status linkListTraverse(LinkList list){
-    if ( !list ) return ERROR;
 
-    LinkNode* node = list->next;
-
-    while(node){
-        printf("%d ", node->data);
-        node = node->next;
-    }
 }
 
 
