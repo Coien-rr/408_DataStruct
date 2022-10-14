@@ -70,4 +70,10 @@ Status Merge(StaticSqList* L, IndexType low, IndexType mid, IndexType high);
 Status mergeSort(StaticSqList* L, IndexType low, IndexType high);
 
 
+
+//------------数组有关操作算法的实现(参考王道强化DS打卡表)-----------//
+Status reverseSqList(StaticSqList* L);     //顺序表前后翻转
+Status removeElemSqList(StaticSqList* L, ElemType x);   //删除数组中的指定元素X
+Status mergeOrderSqList(StaticSqList* L1, StaticSqList* L2, StaticSqList* L3); //合并两个有序数组;
+
 #endif //INC_408_DATASTRUCT_SEQUENCETABLE_H

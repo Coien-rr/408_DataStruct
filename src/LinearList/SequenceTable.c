@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 #include "LinearList/SequenceTable.h"
 
 
@@ -335,6 +336,72 @@ Status mergeSort(StaticSqList* L, IndexType low, IndexType high){
     return OK;
 }
 
+//------------数组有关操作算法的实现(参考王道强化DS打卡表)-----------//
+//顺序表前后翻转
+Status reverseSqList(StaticSqList* L){
+    for (int front = 0, end = L->Length-1; front < end; front++, end--){
+        //交换操作
+        int temp = L->data[front];
+        L->data[front] = L->data[end];
+        L->data[end] = temp;
+    }
+    return OK;
+    //时间复杂度：O(n)
+    //空间复杂度：O(1)
+}
+
+
+//删除数组中的指定元素X
+Status removeElemSqList(StaticSqList* L, ElemType x){
+    int index = 0;
+    while ( index < L->Length ) {
+        if ( L->data[index] == x ){
+            //末尾元素为x的情况，将末尾数组元素舍去（即数组长度-1），后继续访问倒数第二个
+            while (L->data[L->Length-1] == x)   (L->Length)--;
+
+            //该情况为index后续全为x，故while循环一直舍去至index> L->Length-1
+            if (index > L->Length-1) break;
+
+            L->data[index] = L->data[L->Length-1];
+            (L->Length)--;
+
+        }
+        index++;
+    }
+
+    return OK;
+    //时间复杂度：O(n)
+    //空间复杂度：O(1)
+}
+
+
+//合并两个有序数组;
+Status mergeOrderSqList(StaticSqList* L1, StaticSqList* L2, StaticSqList* L3){
+    int ansIndex = 0;
+    int index1 = 0, index2 = 0;
+
+    while (index1 < L1->Length && index2 < L2->Length){
+        if ( L1->data[index1] <= L2->data[index2] ){
+            L3->data[ansIndex++] = L1->data[index1++];
+            L3->Length++;
+        } else {
+            L3->data[ansIndex++] = L2->data[index2++];
+            L3->Length++;
+        }
+    }
+
+    while ( index1 < L1->Length ) {
+        L3->data[ansIndex++] = L1->data[index1++];
+        L3->Length++;
+    }
+
+    while ( index2 < L2->Length ) {
+        L3->data[ansIndex++] = L2->data[index2++];
+        L3->Length++;
+    }
+
+    return OK;
+}
 
 
 

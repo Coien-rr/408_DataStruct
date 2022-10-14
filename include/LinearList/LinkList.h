@@ -28,10 +28,16 @@ Status linkListInsert(LinkList list, int index, int elem);
 Status linkListRemove(LinkList list, int index, int *elem);
 Status linkListTraverse(LinkList list);
 
+//------------链表有关操作算法的实现(参考王道强化DS打卡表)-----------//
+Status linkListRemoveElem(LinkList list, ElemType elem);
+Status linkListSort(LinkList list);                             //链表排序
+Status linkListRemoveRepeat(LinkList list);                     //链表去重
+Status linkListRemoveRepeat_Sorted(LinkList list);              //有序链表去重
 
 //辅助函数
 LinkNode* creatNewLinkNode(int elem);
 Status createDemoLinkList(LinkList list, int count);
+Status linkListPrint(LinkList list);//打印函数
 
 
 #endif //INC_408_DATASTRUCT_LINKLIST_H

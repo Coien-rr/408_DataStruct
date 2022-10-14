@@ -8,17 +8,19 @@
 
 
 int main () {
-    StaticSqList sqList;
-    InitList_Static(&sqList);
-    createDemoSqList(&sqList, 12);
+    LinkList list = initLinkList();
 
-    ListPrint_Static(&sqList);
+    createDemoLinkList(list, 10);
 
-    int key = sqList.data[11];
+    linkListPrint(list);
 
-    mergeSort(&sqList, 0, 11);
+    linkListSort(list);
 
-    ListPrint_Static(&sqList);
+    linkListPrint(list);
 
-    printf("binarySearch Test!\nIndex: %d!", binarySearch(sqList, key));
+    linkListRemoveRepeat_Sorted(list);
+
+//    linkListRemoveElem(list, x);
+
+    linkListPrint(list);
 }
