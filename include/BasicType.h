@@ -5,6 +5,7 @@
 #ifndef INC_408_DATASTRUCT_BASICTYPE_H
 #define INC_408_DATASTRUCT_BASICTYPE_H
 
+//#define INT_MAX (unsigned int(-1) >> 1)
 #define TRUE 1
 #define FALSE 0
 #define OK 1

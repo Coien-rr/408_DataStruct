@@ -116,6 +116,16 @@ Status linkListHeadInsert(LinkList list, int elem){
     return OK;
 }
 
+Status linkListHeadInsertNode(LinkList list, LinkNode* curNode){
+    if ( !list || !curNode ) return ERROR;
+
+    curNode->next = list->next;
+    list->next = curNode;
+    list->data++;
+
+    return OK;
+}
+
 Status linkListTailInsert(LinkList list, int elem){
     if ( !list ) return ERROR;
 
@@ -126,6 +136,19 @@ Status linkListTailInsert(LinkList list, int elem){
     LinkNode* curNode = list;
     while( curNode->next != NULL ) curNode = curNode->next;
     curNode->next = newNode;
+    list->data++;
+
+    return OK;
+}
+
+Status linkListTailInsertNode(LinkList list, LinkNode* curNode){
+    if ( !list || !curNode ) return ERROR;
+
+    LinkNode* node = list;
+
+    while ( node->next != NULL ) node = node->next;
+    curNode->next = node->next;
+    node->next = curNode;
     list->data++;
 
     return OK;
@@ -207,6 +230,17 @@ Status createDemoLinkList(LinkList list, int count){
 
     return OK;
 }
+
+//在某个结点后添加一个结点，返回后一结点的指针
+LinkNode* linkListAddBackNode( LinkNode* priorNode, LinkNode* curNode) {
+    if ( !priorNode || !curNode ) return ERROR;
+
+    curNode->next = priorNode->next;
+    priorNode->next = curNode;
+
+    return curNode;
+}
+
 
 Status linkListPrint(LinkList list){
     printf("%d\n", list->data);
@@ -335,19 +369,199 @@ Status linkListRemoveRepeat_Sorted(LinkList list){
     return OK;
 }
 
+//拆分链表
+Status linkListSplit(LinkList list1, LinkList list2) {
+    //list1, list2指向的均为头节点
+    LinkNode* p = list1->next;
+    LinkNode* q = list2;
+
+    while ( p->next != NULL ) {
+        LinkNode* curNode = p->next;
+        p->next = curNode->next;
+        p = p->next;
+
+        //使用头插法插入list2
+        curNode->next = q->next;
+        q->next = curNode;
+        list2->data++;
+
+        if ( p == NULL ) {
+            break;
+        }//偶数个结点情况
+    }
+
+    return OK;
+}
+
+//有序链表合并为降序链表
+Status linkListSortedMerge_Descending(LinkList list1, LinkList list2){
+    LinkNode* p = list1;
+    LinkNode* q = list2;
+
+    LinkNode* list = creatNewLinkNode(0);
+
+    while ( q->next != NULL && p->next != NULL ) {
+        LinkNode* curNode = NULL;
+        if ( q->next->data < p->next->data ) {
+            //从list2上摘下该结点
+            curNode = q->next;
+            q->next = curNode->next;
+        } else {
+            curNode = p->next;
+            p->next = curNode->next;
+        }
+        //将结点插入list中
+        linkListHeadInsertNode(list, curNode);
+    }
+
+    while ( p->next != NULL ) {
+        LinkNode* curNode = p->next;
+        p->next = curNode->next;
+
+        linkListHeadInsertNode(list, curNode);
+    }
+
+    while ( q->next != NULL ) {
+        LinkNode* curNode = q->next;
+        q->next = curNode->next;
+
+        linkListHeadInsertNode(list, curNode);
+    }
+
+    //此时list1为空，将list转接到list1上，
+    list1->data = list->data;
+    list1->next = list->next;
+    list->next = NULL;
+
+    //list2没有结点时
+    free(q);
+    free(list);
+
+    return OK;
+}
 
 
+//有序链表合并为递增链表
+Status linkListSortedMerge_Ascending(LinkList list1, LinkList list2){
+    LinkNode* p = list1;
+    LinkNode* q = list2;
 
+    LinkList list = creatNewLinkNode(0);
+    LinkNode* endNode = list;
 
+    while ( p->next != NULL && q->next != NULL) {
+        LinkNode* curNode = NULL;
+        if ( p->next->data < q->next->data ) {
+            curNode = p->next;
+            p->next = curNode->next;
+        } else {
+            curNode = q->next;
+            q->next = curNode->next;
+        }
 
+        //在list队尾插入数据
+        endNode = linkListAddBackNode(endNode, curNode);;
+        list->data++;
+    }
 
+    while ( p->next != NULL ) {
+        LinkNode* curNode = p->next;
+        p->next = curNode->next;
 
+        endNode = linkListAddBackNode(endNode, curNode);;
+        list->data++;
+    }
 
+    while ( q->next != NULL ) {
+        LinkNode* curNode = q->next;
+        q->next = curNode->next;
 
+        endNode = linkListAddBackNode(endNode, curNode);;
+        list->data++;
+    }
 
+    //此时list1为空，将list转接到list1上，
+    list1->data = list->data;
+    list1->next = list->next;
+    list->next = NULL;
 
+    //list2没有结点时
+    free(q);
+    free(list);
 
+    return OK;
+}
 
+//返回链表最小值
+ElemType linkListFindMin(LinkList list) {
+    LinkNode* curNode = list->next;
+    int min = INT_MAX;
+    while (curNode != NULL){
+        if ( curNode->data < min) {
+            min = curNode->data;
+        }
+        curNode = curNode->next;
+    }
+
+    return min;
+}
+
+//查找链表内是否有环（快慢指针）
+Status linkListCheckRings(LinkList list) {
+    if ( !list ) return ERROR;
+    if ( list->data < 3 ) return TRUE;
+
+    LinkNode* p1 = list->next;          //慢指针
+    LinkNode* p2 = list->next->next;    //快指针
+
+    while (TRUE) {
+        if ( p1 == p2 ) return TRUE;
+        if ( p2 == NULL ) return FALSE;
+
+        p1 = p1->next;
+        p2 = p2->next;
+
+        if ( p2 != NULL ) {
+            p2 = p2->next;
+        } else {
+            break;
+        }
+    }
+
+    return FALSE;
+}
+
+//判断链表是否对称
+Status linkListCheckSymmetry(LinkList list) {
+    //法一：拷贝到数组
+    //时间复杂度O(n)
+    //空间复杂度O(n)
+    ElemType* arr = (ElemType*)malloc(sizeof(ElemType)*(list->data));
+    LinkNode* curNode = list->next;
+    int index = 0;
+    while ( curNode != NULL ) {
+        arr[index++] = curNode->data;
+        curNode = curNode->next;
+    }
+
+    for (int i = 0; i <= index/2; i++) {
+        if ( arr[i] != arr[index-i] ) {
+            free(arr);
+            return FALSE;
+        }
+    }
+
+    free(arr);
+    return TRUE;
+
+    //法二：数组逆置 （but会变换链表！！
+    //时间复杂度O(n)
+    //空间复杂度O(1)
+    //1、 先设置快慢指针-查找到链表中点
+    //2、 后半段逆置
+    //3. 逐项比较
+
+}
 
 
 

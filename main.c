@@ -12,15 +12,14 @@ int main () {
 
     createDemoLinkList(list, 10);
 
-    linkListPrint(list);
-
-    linkListSort(list);
+//    linkListSort(list);
 
     linkListPrint(list);
 
-    linkListRemoveRepeat_Sorted(list);
+    printf("minNode:%d", linkListFindMin(list));
+//    linkListRemoveRepeat_Sorted(list);
 
 //    linkListRemoveElem(list, x);
 
-    linkListPrint(list);
+//    linkListPrint(list);
 }
